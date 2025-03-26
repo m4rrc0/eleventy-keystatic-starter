@@ -25,7 +25,7 @@ export default config({
     posts: collection({
       label: 'Posts',
       slugField: 'title',
-      path: 'src/content/posts/*',
+      path: 'content/posts/*',
       format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
@@ -33,7 +33,7 @@ export default config({
           label: 'Content',
           options: {
             image: {
-              directory: 'src/assets/images/posts',
+              directory: 'content/assets/images/posts',
               publicPath: '../../assets/images/posts/',
             },
           },

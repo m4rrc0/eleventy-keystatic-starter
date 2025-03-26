@@ -33,6 +33,7 @@ const adapter = LOCAL_BUILD
 
 // https://astro.build/config
 export default defineConfig({
+  srcDir: './cms',
   integrations: [react(), markdoc(), keystatic()],
   adapter,
   vite: {

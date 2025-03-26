@@ -1,10 +1,60 @@
 {
-  "name": "keystatic-deploy-test",
+  "name": "eleventy-keystatic-starter",
   "version": "0.0.1",
-  "license": "MIT",
+  "description": "A starter project for Keystatic with Eleventy",
+  "homepage": "https://github.com/m4rrc0/eleventy-keystatic-starter#readme",
+  "type": "module",
+  "license": "ISC",
+  "scripts": {
+    "nothing": "#",
+    "dev": "concurrently --names CMS,Site -c red,blue \"npm run dev:cms\" \"npm run dev:eleventy\"",
+    "start": "concurrently --names CMS,Site -c red,blue \"npm run start:cms\" \"npm run start:eleventy\"",
+    "build": "concurrently --names CMS,Site -c red,blue \"npm run build:cms\" \"wait-on ./dist && npm run build:eleventy\"",
+    "preview": "concurrently --names CMS,Site -c red,blue \"npm run preview:cms\" \"npm run preview:eleventy\"",
+    "---site---": "------",
+    "eleventy": "eleventy",
+    "dev:eleventy": "eleventy --serve",
+    "start:eleventy": "eleventy --serve",
+    "build:eleventy": "eleventy",
+    "preview:eleventy": "eleventy --serve",
+    "---cms---": "------",
+    "astro": "astro",
+    "dev:cms": "astro dev",
+    "start:cms": "astro dev",
+    "build:cms": "astro build",
+    "preview:cms": "astro preview",
+    "---local-preview---": "------",
+    "wrangler": "wrangler",
+    "netlify": "netlify",
+    "vercel": "vercel",
+    "dev:netlify": "netlify dev",
+    "dev:cloudflare": "wrangler pages dev",
+    "dev:vercel": "vercel dev",
+    "--INSTRUCTIONS--": "Run \"npm run pre-watch:netlify\" then stop it and run \"npm run watch:netlify\"",
+    "pre-watch:netlify": "PREFERRED_HOSTING=netlify BROWSER=none netlify serve --context prewatch",
+    "watch:netlify": "PREFERRED_HOSTING=netlify BROWSER=none nodemon --watch content -e mdoc,ts,json -x \"netlify serve --context watch\"",
+    "---utils---": "------",
+    "generate-secret": "node generate-keystatic-secret.js",
+    "clean": "rm -rf dist public .astro .wrangler .netlify .vercel"
+  },
+  "keywords": [
+    "eleventy",
+    "11ty",
+    "starter",
+    "keystatic",
+    "cms",
+    "headless-cms"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/m4rrc0/keystatic-deploy-test.git"
+    "url": "https://github.com/m4rrc0/eleventy-keystatic-starter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/m4rrc0/eleventy-keystatic-starter/issues"
+  },
+  "author": {
+    "name": "Marc Coët",
+    "url": "https://www.m4rr.co/"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.2.4",
@@ -21,17 +71,14 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "@m4rrc0/eleventy-plugin-markdoc": "^0.1.3",
+    "concurrently": "^9.1.2",
     "dotenv": "^16.4.7",
     "netlify-cli": "^19.0.2",
+    "nodemon": "^3.1.9",
     "vercel": "^41.4.1",
-    "wrangler": "^4.0.0"
-  },
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "generate-secret": "node generate-keystatic-secret.js"
+    "wait-on": "^8.0.3",
+    "wrangler": "^4.4.1"
   }
 }
